@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(state != null)
         {
-            state.text = animator.GetInteger("State").ToString();
+            state.text = movementState.ToString();
         }
         
     }
