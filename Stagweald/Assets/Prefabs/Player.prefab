@@ -537,6 +537,7 @@ MonoBehaviour:
   xSensitivity: 400
   ySensitivity: 400
   orientation: {fileID: 6076083603812018203}
+  crossbow: {fileID: 0}
 --- !u!95 &4477450962159474108
 Animator:
   serializedVersion: 5

@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     public Transform orientation; //might change this, idk if I like it
+    public Transform camera;
     public TMP_Text spedometer;
     public TMP_Text state;
     public TMP_Text groundedText;
@@ -166,7 +167,8 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(crouchKey)) //CURRENTLY NO CHECK FOR GROUNDED 
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-
+            //instead of scaling it down, lets just manually move the camera object down a little bit?
+            //camera.
             //slight downward force to push them onto the ground
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         }

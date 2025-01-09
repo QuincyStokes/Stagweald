@@ -51,17 +51,17 @@ public class Crossbow : MonoBehaviour
 
     void Reload()
     {
-        print("Reloading");
         if(!loaded)
         {
-            print("Reload Success");
             ammo -= 1;
             //do some animation
             loaded = true;
             currentBolt = Instantiate(bolt, boltSpawnPoint.position, boltSpawnPoint.rotation);
             currentBolt.transform.SetParent(transform);
             //boltSpawnPoint.transform.SetParent(currentBolt.transform);
-            currentBolt.GetComponent<Rigidbody>().useGravity = false;
+            Rigidbody rb = currentBolt.GetComponent<Rigidbody>();
+            rb.useGravity = false;
+            rb.isKinematic = true;
         }
         UpdateAmmoUI();
        
@@ -70,14 +70,15 @@ public class Crossbow : MonoBehaviour
 
     void Fire()
     {
-        print("Firing");
         if(loaded)
         {
-            print("Fire Success");
             loaded = false;
             //do shoot animation
-            currentBolt.GetComponent<Rigidbody>().useGravity = true;
-            currentBolt.GetComponent<Rigidbody>().AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
+            Rigidbody rb = currentBolt.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
+            StartCoroutine(BoltDecay(currentBolt));
         }
         UpdateAmmoUI();
     }
@@ -96,6 +97,11 @@ public class Crossbow : MonoBehaviour
         
     }
 
-    
+    public IEnumerator BoltDecay(GameObject bolt)
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(bolt);
+    }
+
 
 }

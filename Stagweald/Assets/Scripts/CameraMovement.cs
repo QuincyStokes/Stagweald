@@ -10,6 +10,7 @@ public class CameraMovement : MonoBehaviour
 
     [Header("References")]
     public Transform orientation;
+    public Transform crossbow;
 
     private float xRotation;
     private float yRotation;
@@ -36,6 +37,5 @@ public class CameraMovement : MonoBehaviour
         //apply the rotation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
     }
 }
