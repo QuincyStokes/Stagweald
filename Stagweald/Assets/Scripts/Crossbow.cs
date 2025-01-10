@@ -96,23 +96,7 @@ public class Crossbow : MonoBehaviour
             rb.useGravity = true;
             rb.isKinematic = false;
             //movement penalty, apply a small random offset to projectile direction
-            if(playerRb.velocity.magnitude > 1)
-            {
-                Vector3 randomOffset = new Vector3(
-                Random.Range(-movementError, movementError),
-                Random.Range(-movementError, movementError),
-                0f);
-
-                Vector3 finalDirection = transform.TransformDirection(randomOffset) + transform.forward;
-                finalDirection.Normalize();
-
-                rb.AddForce(finalDirection * boltSpeed, ForceMode.Impulse);
-            }
-            else
-            {
-                rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
-            }
-           
+            rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
             StartCoroutine(BoltDecay(currentBolt));
         }
         UpdateAmmoUI();
