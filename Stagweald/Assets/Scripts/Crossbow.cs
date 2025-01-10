@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using Unity.Profiling;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Crossbow : MonoBehaviour
     public Transform boltSpawnPoint;
     public float boltSpeed;
     private GameObject currentBolt;
+    public float movementError;
 
 
     [Header("UI References")]
@@ -23,7 +25,14 @@ public class Crossbow : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode fireKeycode;
     public KeyCode reloadKeycode;
+    public KeyCode aimDownSightsKeycode;
 
+
+    [Header("Animation")]
+    public Animator animator;
+
+    [Header("References")]
+    public Rigidbody playerRb;
 
 
     void Start()
@@ -47,11 +56,20 @@ public class Crossbow : MonoBehaviour
         {
             Reload();
         }
+
+        if(Input.GetKeyDown(aimDownSightsKeycode))
+        {
+            ADS();
+        }
+        if(Input.GetKeyUp(aimDownSightsKeycode))
+        {
+            UnADS();
+        }
     }
 
     void Reload()
     {
-        if(!loaded)
+        if(!loaded && ammo >= 1)
         {
             ammo -= 1;
             //do some animation
@@ -77,7 +95,24 @@ public class Crossbow : MonoBehaviour
             Rigidbody rb = currentBolt.GetComponent<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;
-            rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
+            //movement penalty, apply a small random offset to projectile direction
+            if(playerRb.velocity.magnitude > 1)
+            {
+                Vector3 randomOffset = new Vector3(
+                Random.Range(-movementError, movementError),
+                Random.Range(-movementError, movementError),
+                0f);
+
+                Vector3 finalDirection = transform.TransformDirection(randomOffset) + transform.forward;
+                finalDirection.Normalize();
+
+                rb.AddForce(finalDirection * boltSpeed, ForceMode.Impulse);
+            }
+            else
+            {
+                rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
+            }
+           
             StartCoroutine(BoltDecay(currentBolt));
         }
         UpdateAmmoUI();
@@ -101,6 +136,16 @@ public class Crossbow : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         Destroy(bolt);
+    }
+
+    void ADS()
+    {
+        animator.SetBool("ADS", true);
+    }
+
+    void UnADS()
+    {
+        animator.SetBool("ADS", false);
     }
 
 

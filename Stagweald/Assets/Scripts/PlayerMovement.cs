@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     public Transform orientation; //might change this, idk if I like it
-    public Transform camera;
+    public Transform playerObject;
     public TMP_Text spedometer;
     public TMP_Text state;
     public TMP_Text groundedText;
@@ -81,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * .5f + .05f, whatIsGround);
+        transform.rotation = orientation.rotation;
         if(groundedText != null)
         {
             groundedText.text = "Grounded: " + grounded.ToString();
@@ -128,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetInteger("State", 2);
         }//walking
 
-        else if (grounded && rb.velocity.magnitude == 0)
+        else if (grounded && rb.velocity.magnitude <=1 )
         {
             movementState = MovementState.Idle;
             animator.SetInteger("State", 0);
@@ -166,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
         //start crouching
         if(Input.GetKeyDown(crouchKey)) //CURRENTLY NO CHECK FOR GROUNDED 
         {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            playerObject.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             //instead of scaling it down, lets just manually move the camera object down a little bit?
             //camera.
             //slight downward force to push them onto the ground
@@ -176,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         //stop crouching
         if(Input.GetKeyUp(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            playerObject.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
             //dont need to upward force, unity physics will figure it out :)
             
         }
