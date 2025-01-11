@@ -9,6 +9,11 @@ public class Hitbox : MonoBehaviour, IHitbox
     private float damageModifier;
     public float DamageModifier { get => damageModifier; set => damageModifier = value; }
 
+    private PlayerMovement player;
+
+
+    
+        
     public void OnTriggerEnter(Collider other)
     {
         print("Hit");
@@ -19,7 +24,10 @@ public class Hitbox : MonoBehaviour, IHitbox
             if(bolt != null)
             {
                 print("Deer took " + DamageModifier * bolt.damage + " damage in the " + this.name);
-                GetComponentInParent<Deer>().TakeDamage(DamageModifier * bolt.damage);
+                player = GameObject.FindObjectOfType<PlayerMovement>();
+
+                GetComponentInParent<SmartDeer>().TakeDamage(DamageModifier * bolt.damage, player.transform.position);
+                Destroy(bolt.gameObject);
             }
         }
     }
