@@ -42,17 +42,19 @@ public class SellHides : SellItem
             inventoryAmount.text = "Inventory:\n" + InventoryManager.Instance.numDeerHides.ToString();
             InventoryManager.Instance.UpdateGold();
             sellAllButton.GetComponentInChildren<TMP_Text>().text = "Sell All (" + (sellPrice * InventoryManager.Instance.numDeerHides).ToString()  + "g)";
+
+            if(InventoryManager.Instance.numDeerHides == 0)
+            {
+                sellOneButton.interactable = false;
+                sellAllButton.interactable = false;
+            } 
+            else
+            {
+                sellOneButton.interactable = true;
+                sellAllButton.interactable = true;
+            }
         }
-        if(InventoryManager.Instance.numDeerHides == 0)
-        {
-            sellOneButton.interactable = false;
-            sellAllButton.interactable = false;
-        } 
-        else
-        {
-            sellOneButton.interactable = true;
-            sellAllButton.interactable = true;
-        }
+        
         
     }
 }
