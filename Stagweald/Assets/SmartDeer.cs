@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ public class SmartDeer : MonoBehaviour
     [Header("Flee Settings")]
     public float playerDetectionRange = 15f;
     public float fleeDistance = 30f;      // How far the deer tries to get away
+    public float fleeSpeed;
+    public float idleSpeed;
 
     [Header("Health")]
     public float maxHealth;
@@ -24,6 +27,13 @@ public class SmartDeer : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode interactionKeyCode;
     private bool playerInRange;
+
+    private DeerState deerState;
+    private enum DeerState{
+        fleeing,
+        idle,
+        dead
+    }
 
     private Transform player;
     private float wanderTimer;
@@ -55,6 +65,7 @@ public class SmartDeer : MonoBehaviour
         // Check if player is nearby
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         RotateTowardsMovementDirection();
+        DeerStateHandler();
         if (distanceToPlayer <= playerDetectionRange && alive)
         {
             FleeFromPlayer();
@@ -78,8 +89,25 @@ public class SmartDeer : MonoBehaviour
         }
     }
 
+    private void DeerStateHandler()
+    {
+        if(deerState == DeerState.idle)
+        {
+            agent.speed = idleSpeed;
+        }
+        else if (deerState == DeerState.fleeing)
+        {
+            agent.speed = fleeSpeed;
+        }
+        else if (deerState == DeerState.dead)
+        {
+
+        }
+    }
+
     private void Idle()
     {
+        deerState = DeerState.idle;
         wanderTimer += Time.deltaTime;
         if (wanderTimer >= wanderInterval)
         {
@@ -104,7 +132,7 @@ public class SmartDeer : MonoBehaviour
     private void FleeFromPlayer()
     {
         if (player == null) return;
-
+        deerState = DeerState.fleeing;
         // direction away from the player
         Vector3 fleeDirection = (transform.position - player.position).normalized;
         // find a point away from the player (fleeDistance away)
@@ -128,22 +156,28 @@ public class SmartDeer : MonoBehaviour
 
     public void TakeDamage(float damage, Vector3 position)
     {
-        print("Deer took " + damage + " damage.");
-        currentHealth -= damage;
-        FleeFromPlayer();
-        if(currentHealth <= 0)
+        if(alive)
         {
-            Die();
-        }
+            print("Deer took " + damage + " damage.");
+            currentHealth -= damage;
+            FleeFromPlayer();
+            if(currentHealth <= 0)
+            {
+                Die();
+            }
+        }  
     }
 
-     void Die()
+    void Die()
     {
         alive = false;
+        deerState = DeerState.dead;
         //activate Interactible-ness
         ActivateInteractable();
         //when interacted with, play dissolve effect, despawn, give loot.
         //Destroy(gameObject);
+        agent.ResetPath();
+        agent.enabled = false;
     }
 
     void ActivateInteractable()
