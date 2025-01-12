@@ -8,18 +8,21 @@ public class Upgrade : MonoBehaviour
 {
     [Header("Properties")]
     public Sprite upgradeIcon;
-    public int price;
     [HideInInspector]
     public bool upgraded;
+    public string itemName;
+    public string description;
+    public int price;
 
     [Header("UI References")]
     public Image image;
-    public TMP_Text priceText;
-    public Button buyButton;
+    public TMP_Text itemNameUI;
+    public TMP_Text descriptionUI;
     
     void Start()
     {
         image.sprite = upgradeIcon;
-        priceText.text = price + "g";
+        itemNameUI.text = itemName;
+        descriptionUI.text = description;
     }
 }

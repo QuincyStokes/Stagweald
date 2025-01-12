@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ScopeUpgrade : Upgrade
 {
+    [Header("Scope")]
+    public GameObject scope;
+
     public void Upgrade()
     {
         //this is where we will add the scope to the model.
@@ -14,7 +17,8 @@ public class ScopeUpgrade : Upgrade
             print("Bought for " + price + "gold.");
             InventoryManager.Instance.UpdateGold();
             upgraded = true;
-            buyButton.interactable = false;
+            scope.SetActive(true);
+            //will also need to adjust ADS animation probably
         }
         
         

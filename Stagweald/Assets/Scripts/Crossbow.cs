@@ -30,6 +30,7 @@ public class Crossbow : MonoBehaviour
 
     [Header("Animation")]
     public Animator animator;
+    public Animation crossbowAnimation;
 
     [Header("References")]
     public Rigidbody playerRb;
@@ -73,13 +74,15 @@ public class Crossbow : MonoBehaviour
         {
             ammo -= 1;
             //do some animation
+            crossbowAnimation.Play("Reload");
             loaded = true;
             currentBolt = Instantiate(bolt, boltSpawnPoint.position, boltSpawnPoint.rotation);
             currentBolt.transform.SetParent(transform);
             //boltSpawnPoint.transform.SetParent(currentBolt.transform);
-            Rigidbody rb = currentBolt.GetComponent<Rigidbody>();
+            Rigidbody rb = currentBolt.GetComponentInChildren<Rigidbody>();
             rb.useGravity = false;
             rb.isKinematic = true;
+            
         }
         UpdateAmmoUI();
        
@@ -92,11 +95,12 @@ public class Crossbow : MonoBehaviour
         {
             loaded = false;
             //do shoot animation
-            Rigidbody rb = currentBolt.GetComponent<Rigidbody>();
+            Rigidbody rb = currentBolt.GetComponentInChildren<Rigidbody>();
             rb.useGravity = true;
             rb.isKinematic = false;
             //movement penalty, apply a small random offset to projectile direction
             rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
+            crossbowAnimation.Play("Fire");
             StartCoroutine(BoltDecay(currentBolt));
         }
         UpdateAmmoUI();

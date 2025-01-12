@@ -19,7 +19,6 @@ public class RuneUpgrade : Upgrade
             print("Bought for " + price + "gold.");
             InventoryManager.Instance.UpdateGold();
             upgraded = true;
-            buyButton.interactable = false;
             crossbowRenderer.material.SetTexture("_MainTex", runeTexture);
         }
     }
