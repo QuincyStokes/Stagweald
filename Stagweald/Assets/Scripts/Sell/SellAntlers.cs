@@ -16,7 +16,7 @@ public class SellAntlers : SellItem
 
     public void SellOneAntler()
     {
-        if(InventoryManager.Instance.SubrtactAntlers(1))
+        if(InventoryManager.Instance.SubtractAntlers(1))
         {
             InventoryManager.Instance.AddGold(sellPrice);
             UpdateInventoryAmount();
@@ -31,7 +31,7 @@ public class SellAntlers : SellItem
     public void SellAllAntlers()
     {
         InventoryManager.Instance.AddGold(InventoryManager.Instance.numAntlers * sellPrice);
-        InventoryManager.Instance.SubrtactAntlers(InventoryManager.Instance.numAntlers);
+        InventoryManager.Instance.SubtractAntlers(InventoryManager.Instance.numAntlers);
         UpdateInventoryAmount();
     }
 

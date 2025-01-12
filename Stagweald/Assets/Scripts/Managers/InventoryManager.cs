@@ -13,7 +13,9 @@ public class InventoryManager : MonoBehaviour
     [Header("Inventory")]
     public int numDeerHides;
     public int numAntlers;
-    public int gold;
+    public int numBolts;
+    public float gold;
+    
 
     [Header("Keybinds")]
     public KeyCode inventoryKeyCode;
@@ -23,6 +25,7 @@ public class InventoryManager : MonoBehaviour
     public TMP_Text numDeerHidesUI;
     public TMP_Text numAntlersUI;
     public TMP_Text goldAmountUI;
+    public TMP_Text numBoltsUI;
 
     private bool inventoryActive;
 
@@ -76,11 +79,12 @@ public class InventoryManager : MonoBehaviour
         else 
         {
             numDeerHides -= amount;
+            UpdateInventoryUI();
             return true;
         }
     }
 
-     public bool SubrtactAntlers(int amount)
+     public bool SubtractAntlers(int amount)
     {
         if(amount > numAntlers)
         {
@@ -89,6 +93,7 @@ public class InventoryManager : MonoBehaviour
         else 
         {
             numAntlers -= amount;
+            UpdateInventoryUI();
             return true;
         }
     }
@@ -98,7 +103,7 @@ public class InventoryManager : MonoBehaviour
         gold += amount;
     }
     
-    public bool SubtractGold(int amount)
+    public bool SubtractGold(float amount)
     {
         if(amount > gold)
         {
@@ -107,18 +112,40 @@ public class InventoryManager : MonoBehaviour
         else
         {
             gold -= amount;
+            UpdateGold();
             return true;
         }
     }
 
     public void UpdateGold()
     {
-        goldAmountUI.text = gold.ToString() + "g";
+        goldAmountUI.text = gold.ToString();
     }
 
-    void UpdateInventoryUI()
+    public void UpdateInventoryUI()
     {
         numDeerHidesUI.text = "Deer Hide: " + numDeerHides;
         numAntlersUI.text = "Antlers: " + numAntlers;
+        numBoltsUI.text = "Bolts: " + numBolts;
+    }
+
+    public bool SubtractBolts(int amount)
+    {
+        if(amount > numBolts)
+        {
+            return false;
+        }
+        else 
+        {
+            numBolts -= amount;
+            UpdateInventoryUI();
+            return true;
+        }
+    }
+
+     public void AddBolts(int amount)
+    {
+        numBolts += amount;
+        UpdateInventoryUI();
     }
 }

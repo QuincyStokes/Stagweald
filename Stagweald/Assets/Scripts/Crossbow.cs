@@ -8,7 +8,7 @@ using UnityEngine;
 public class Crossbow : MonoBehaviour
 {
     [Header("Ammo Specs")]
-    public float ammo; //this is more of an inventory thing..?
+    //public float ammo; //this is more of an inventory thing..?
     private bool loaded; 
     public GameObject bolt;
     public Transform boltSpawnPoint;
@@ -70,9 +70,9 @@ public class Crossbow : MonoBehaviour
 
     void Reload()
     {
-        if(!loaded && ammo >= 1)
+        if(!loaded && InventoryManager.Instance.numBolts >= 1)
         {
-            ammo -= 1;
+            InventoryManager.Instance.SubtractBolts(1);
             //do some animation
             crossbowAnimation.Play("Reload");
             loaded = true;
@@ -93,6 +93,7 @@ public class Crossbow : MonoBehaviour
     {
         if(loaded)
         {
+            
             loaded = false;
             //do shoot animation
             Rigidbody rb = currentBolt.GetComponentInChildren<Rigidbody>();
@@ -104,11 +105,12 @@ public class Crossbow : MonoBehaviour
             StartCoroutine(BoltDecay(currentBolt));
         }
         UpdateAmmoUI();
+    
     }
 
     public void UpdateAmmoUI()
     {
-        reserveAmmo.text = ammo.ToString();
+        reserveAmmo.text = InventoryManager.Instance.numBolts.ToString();
         if(loaded)
         {
             loadedAmmo.text = "1";
@@ -117,6 +119,7 @@ public class Crossbow : MonoBehaviour
         {
            loadedAmmo.text = "0";
         }
+
         
     }
 
