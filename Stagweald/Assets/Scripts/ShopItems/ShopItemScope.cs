@@ -8,16 +8,15 @@ public class ShopItemScope : ShopItem
     [Header("Specific")]
     public GameObject scope;
 
+    public Crossbow crossbow;
+
     public override void ItemPurchased()
     {
-        //this is where we will add the scope to the model.
-        print("Upgrading!");
         upgraded = true;
         scope.SetActive(true);
+        crossbow.hasScope = true;
         //will also need to adjust ADS animation probably
-    
-        
-        
+
     }
 
 

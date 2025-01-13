@@ -14,12 +14,19 @@ public class Crossbow : MonoBehaviour
     public Transform boltSpawnPoint;
     public float boltSpeed;
     private GameObject currentBolt;
+
+    [Header("Crossbow Settings")]
     public float movementError;
+    public float reloadCooldown;
+    public float fireCooldown;
+    private bool canReload;
+    private bool canFire;
 
 
     [Header("UI References")]
     public TMP_Text loadedAmmo;
     public TMP_Text reserveAmmo;
+    public GameObject scopeUI;
 
 
     [Header("Keybinds")]
@@ -31,15 +38,26 @@ public class Crossbow : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
     public Animation crossbowAnimation;
+    
 
     [Header("References")]
     public Rigidbody playerRb;
+    public GameObject scope;
+    
+    [Header("Camera Settings")]
+    public Camera mainCamera;
+    public float cameraScopeFOV;
+    private float baseScopeFOV;
+    public bool hasScope;
 
 
     void Start()
     {
         loaded = false;
         UpdateAmmoUI();
+        baseScopeFOV = mainCamera.fieldOfView;
+        canFire = true;
+        canReload = true;
     }
     void Update()
     {
@@ -70,8 +88,9 @@ public class Crossbow : MonoBehaviour
 
     void Reload()
     {
-        if(!loaded && InventoryManager.Instance.numBolts >= 1)
+        if(!loaded && InventoryManager.Instance.numBolts >= 1 && canReload)
         {
+            canFire = false;
             InventoryManager.Instance.SubtractBolts(1);
             //do some animation
             crossbowAnimation.Play("Reload");
@@ -82,6 +101,8 @@ public class Crossbow : MonoBehaviour
             Rigidbody rb = currentBolt.GetComponentInChildren<Rigidbody>();
             rb.useGravity = false;
             rb.isKinematic = true;
+            canReload = false;
+            StartCoroutine(FireTimer());
             
         }
         UpdateAmmoUI();
@@ -91,9 +112,9 @@ public class Crossbow : MonoBehaviour
 
     void Fire()
     {
-        if(loaded)
+        if(loaded && canFire)
         {
-            
+            canReload = false;
             loaded = false;
             //do shoot animation
             Rigidbody rb = currentBolt.GetComponentInChildren<Rigidbody>();
@@ -103,6 +124,7 @@ public class Crossbow : MonoBehaviour
             rb.AddForce(transform.forward * boltSpeed, ForceMode.Impulse);
             crossbowAnimation.Play("Fire");
             StartCoroutine(BoltDecay(currentBolt));
+            StartCoroutine(ReloadTimer());
         }
         UpdateAmmoUI();
     
@@ -132,12 +154,44 @@ public class Crossbow : MonoBehaviour
     void ADS()
     {
         animator.SetBool("ADS", true);
+        if(hasScope)
+        {
+            StartCoroutine(ScopeUIDelay(.067f));
+        }
     }
 
     void UnADS()
     {
         animator.SetBool("ADS", false);
+        if(hasScope)
+        {
+            scope.SetActive(true);
+            scopeUI.SetActive(false);
+            mainCamera.fieldOfView = baseScopeFOV;
+        }
+        
     }
+
+    private IEnumerator ScopeUIDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        scope.SetActive(false);
+        scopeUI.SetActive(true);
+        mainCamera.fieldOfView = cameraScopeFOV;
+    }
+
+    private IEnumerator ReloadTimer()
+    {
+        yield return new WaitForSeconds(reloadCooldown);
+        canReload = true;
+    }
+
+    private IEnumerator FireTimer()
+    {
+        yield return new WaitForSeconds(fireCooldown);
+        canFire = true;
+    }
+
 
 
 }

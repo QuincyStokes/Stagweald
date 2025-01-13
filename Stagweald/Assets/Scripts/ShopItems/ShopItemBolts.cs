@@ -8,4 +8,6 @@ public class ShopItemBolts : ShopItem
     {
         InventoryManager.Instance.AddBolts(5);
     }
+
+    
 }

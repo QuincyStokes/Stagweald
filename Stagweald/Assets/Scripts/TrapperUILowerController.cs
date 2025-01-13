@@ -83,7 +83,11 @@ public class TrapperUILowerController : MonoBehaviour
         {
             if(InventoryManager.Instance.SubtractGold(amountSlider.value * currentItemPrice))
             {
-                currentShopItem.ItemPurchased();
+                for (int i = 0; i < amountSlider.value; i++)
+                {
+                    currentShopItem.ItemPurchased();
+                }
+                
             }
             else{
                 print("Not enough gold.");
