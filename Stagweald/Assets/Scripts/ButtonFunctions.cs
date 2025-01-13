@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ButtonFunctions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TrapperUILowerController trapperUI;
+    
+    public void SetBuyMode()
     {
-        
+        trapperUI.buyMode = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetSellmode()
     {
-        
+        trapperUI.buyMode = false;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,20 +12,21 @@ public class InventoryManager : MonoBehaviour
     //should hide these in the inspector eventually, can expose them for nw
 
     [Header("Inventory")]
-    public int numDeerHides;
-    public int numAntlers;
-    public int numBolts;
-    public float gold;
-    
+    public int numDeerHides; //1
+    public int numAntlers; //2
+    public int numMushrooms;
+    public int numBolts; //3
+    public float gold; //-1
 
     [Header("Keybinds")]
     public KeyCode inventoryKeyCode;
 
     [Header("UI")]
-    public GameObject inventory;
+    public GameObject inventoryUI;
     public TMP_Text numDeerHidesUI;
     public TMP_Text numAntlersUI;
     public TMP_Text goldAmountUI;
+    public TMP_Text numMushroomsUI;
     public TMP_Text numBoltsUI;
 
     private bool inventoryActive;
@@ -40,11 +42,12 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        inventory.SetActive(false);
+        inventoryUI.SetActive(false);
         inventoryActive = false;
         UpdateInventoryUI();
         UpdateGold();
     }   
+
 
     void Update()
     {
@@ -52,25 +55,26 @@ public class InventoryManager : MonoBehaviour
         {
             if(inventoryActive)
             {
-                inventory.SetActive(false);
+                inventoryUI.SetActive(false);
                 inventoryActive = false;
                 UpdateGold();
             } else{
-                inventory.SetActive(true);
+                inventoryUI.SetActive(true);
                 inventoryActive = true;
                 UpdateGold();
             }
         }
     }
 
-    public void AddItems(int moreHides=0, int moreAntlers=0)
+    public void AddItems(int moreHides=0, int moreAntlers=0, int moreMushrooms=0)
     {
         numDeerHides += moreHides;
         numAntlers+= moreAntlers;
+        numMushrooms += moreMushrooms;
         UpdateInventoryUI();
     }
 
-    public bool SubrtactHides(int amount)
+    public bool SubtractHides(int amount)
     {
         if(amount > numDeerHides)
         {
@@ -100,7 +104,9 @@ public class InventoryManager : MonoBehaviour
 
     public void AddGold(int amount)
     {
+        print("adding gold " + amount);
         gold += amount;
+        UpdateGold();
     }
     
     public bool SubtractGold(float amount)
@@ -127,6 +133,7 @@ public class InventoryManager : MonoBehaviour
         numDeerHidesUI.text = "Deer Hide: " + numDeerHides;
         numAntlersUI.text = "Antlers: " + numAntlers;
         numBoltsUI.text = "Bolts: " + numBolts;
+        numMushroomsUI.text = "Mushrooms: " + numMushrooms;
     }
 
     public bool SubtractBolts(int amount)
@@ -143,9 +150,23 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-     public void AddBolts(int amount)
+    public void AddBolts(int amount)
     {
         numBolts += amount;
         UpdateInventoryUI();
+    }
+
+    public bool SubtractMushrooms(int amount)
+    {
+        if(amount > numMushrooms)
+        {
+            return false;
+        }
+        else
+        {
+            numMushrooms -= amount;
+            UpdateInventoryUI();
+            return true;
+        }
     }
 }

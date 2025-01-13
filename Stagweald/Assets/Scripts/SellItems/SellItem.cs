@@ -1,41 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ShopItem : MonoBehaviour
+public abstract class SellItem : MonoBehaviour
 {
     [Header("Properties")]
-    public Sprite upgradeIcon;
-    [HideInInspector]
-    public bool upgraded;
+    public Sprite itemIcon;
     public string itemName;
     public string description;
-    public int price;
-    public bool oneTimePurchase;
+    public int sellPrice;
+    public int itemNumber;
 
     [Header("UI References")]
     public Image image;
-    public TMP_Text itemNameUI;
+    public TMP_Text item_nameUI;
     public TMP_Text descriptionUI;
 
     [Header("Lower Shop")]
     public TrapperUILowerController lowerUI;
-    
+
     void Start()
     {
-        image.sprite = upgradeIcon;
-        itemNameUI.text = itemName;
+        image.sprite = itemIcon;
+        item_nameUI.text = itemName;
         descriptionUI.text = description;
     }
 
-    public abstract void ItemPurchased();
-
     public void UpdateLowerUI()
     {
-        
-        lowerUI.currentShopItem = this;
-        lowerUI.RefreshLowerUI(true);
+        lowerUI.currentSellItem = this;
+        lowerUI.RefreshLowerUI(false);
     }
+
+    public abstract void ItemSold(int amount);
 }
