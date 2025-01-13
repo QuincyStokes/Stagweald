@@ -7947,6 +7947,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309907653}
   m_CullTransparentMesh: 1
+--- !u!1 &1317848749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317848750}
+  - component: {fileID: 1317848751}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1317848750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317848749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 947.8984, y: 455.9692, z: 907.52747}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1317848751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317848749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e48167b318d493c4da3c7ebc7e9a8331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 7080b8c3ea099854689e14e630a4f5aa, type: 2}
+  poolSize: 10
 --- !u!1 &1392937982
 GameObject:
   m_ObjectHideFlags: 0
@@ -12671,6 +12717,7 @@ GameObject:
   - component: {fileID: 5202263939073362256}
   - component: {fileID: 1802854473254284719}
   - component: {fileID: 524106995167269725}
+  - component: {fileID: 8285015654479226276}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12799,6 +12846,20 @@ Transform:
   - {fileID: 7860715046025117788}
   m_Father: {fileID: 2142965660344967107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8285015654479226276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5055857569300548960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7f2198dffd56b47a003e6a79d48455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass_footstep: {fileID: 8300000, guid: 8f4f315124528ac43bbd6345881e2e95, type: 3}
+  amg: {fileID: -8476654119314067400, guid: 7080b8c3ea099854689e14e630a4f5aa, type: 2}
 --- !u!4 &8422435846514652049
 Transform:
   m_ObjectHideFlags: 0
@@ -12897,3 +12958,4 @@ SceneRoots:
   - {fileID: 974647349}
   - {fileID: 280956556}
   - {fileID: 594730053}
+  - {fileID: 1317848750}
