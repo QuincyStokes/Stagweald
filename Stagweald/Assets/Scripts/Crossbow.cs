@@ -21,6 +21,7 @@ public class Crossbow : MonoBehaviour
     public float fireCooldown;
     private bool canReload;
     private bool canFire;
+    public bool isUpgraded;
 
 
     [Header("UI References")]

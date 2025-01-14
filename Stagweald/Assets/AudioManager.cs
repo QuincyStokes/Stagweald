@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -13,6 +15,18 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Source Pool")]
     [SerializeField] private int poolSize = 10;
     private List<AudioSource> audioSourcePool;
+
+    [Header("Background Music Settings")]
+    public AudioClip[] backgroundMusic;
+    private bool backgroundMusicPlaying;
+    private AudioClip currentBackgroundMusic;
+    public AudioMixerGroup bgMixerGroup;
+
+    [Header("Ambient Sound Settings")]
+    public AudioClip[] ambientSounds;
+    private bool ambientSoundPlaying;
+    private AudioClip currentAmbientSound;
+    public AudioMixerGroup ambientMixerGroup;
 
     private void Awake()
     {
@@ -28,6 +42,14 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void Update()
+    {
+        if(!backgroundMusicPlaying)
+        {
+            PlayBackgroundMusic();
         }
     }
 
@@ -81,5 +103,45 @@ public class AudioManager : MonoBehaviour
     {
         masterMixer.SetFloat(groupName, valueInDb);
     }
+
+
+    //background music
+    public void PlayBackgroundMusic()
+    {
+        if(backgroundMusic.Count() > 0)
+        {
+            AudioClip bg = backgroundMusic[Random.Range(0, backgroundMusic.Count())];
+            if(bg == currentBackgroundMusic)
+            {
+                PlayBackgroundMusic();
+                return;
+            }
+            else
+            {
+                backgroundMusicPlaying = true;
+                //have a clip we didn't just play
+                currentBackgroundMusic = bg;
+                PlayOneShot(bg, 1f, bgMixerGroup);
+                StartCoroutine(WaitForBackgroundMusic(bg.length));
+            }
+        }
+        //can do same thing with ambient noise i think, but should give it a chance to play
+    }
+
+    public void PlayAmbientSound()
+    {
+        if(ambientSounds.Count() > 0)
+        {
+
+        }
+    }
+
+
+    public IEnumerator WaitForBackgroundMusic(float time)
+    {
+        yield return new WaitForSeconds(time +1);
+        backgroundMusicPlaying = false;
+    }
+
 }
 

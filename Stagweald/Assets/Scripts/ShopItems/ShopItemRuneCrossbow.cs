@@ -5,12 +5,12 @@ using UnityEngine;
 public class ShopItemRuneCrossbow : ShopItem
 {
     [Header("Specific")]
-    public Texture runeTexture;
     public Material runeMaterial;
     public Renderer crossbowRenderer;
     public Renderer triggerRenderer;
     public Renderer leverRenderer;
     public Renderer scopeRenderer;
+    public Crossbow crossbow;
     
     public override void ItemPurchased()
     {
@@ -21,4 +21,16 @@ public class ShopItemRuneCrossbow : ShopItem
         leverRenderer.material = runeMaterial;
         scopeRenderer.material = runeMaterial;
     }
+
+    void OnEnable()
+    {
+        image.sprite = upgradeIcon;
+        itemNameUI.text = itemName;
+        descriptionUI.text = description;
+        if(!crossbow.isUpgraded)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    
 }

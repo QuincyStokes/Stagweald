@@ -155,7 +155,7 @@ public class TrapperUILowerController : MonoBehaviour
         print(buyMode);
         if(buyMode)
         {
-            if(!currentShopItem.upgraded)
+            if(!currentShopItem.upgraded && currentShopItem)
             {
                 if(InventoryManager.Instance.SubtractGold(amountSlider.value * currentItemPrice))
                 {
@@ -176,8 +176,12 @@ public class TrapperUILowerController : MonoBehaviour
         //SELL MODE
         else
         {
-            currentSellItem.ItemSold((int)amountSlider.value);
-            RefreshLowerUI(false);
+            if(currentSellItem)
+            {
+                currentSellItem.ItemSold((int)amountSlider.value);
+                RefreshLowerUI(false);
+            }
+            
         }
         
     
