@@ -16,11 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private int poolSize = 10;
     private List<AudioSource> audioSourcePool;
 
-    [Header("Background Music Settings")]
-    public AudioClip[] backgroundMusic;
-    private bool backgroundMusicPlaying;
-    private AudioClip currentBackgroundMusic;
-    public AudioMixerGroup bgMixerGroup;
+    
 
     [Header("Ambient Sound Settings")]
     public AudioClip[] ambientSounds;
@@ -45,13 +41,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if(!backgroundMusicPlaying)
-        {
-            PlayBackgroundMusic();
-        }
-    }
+   
 
     private void InitializeAudioSourcePool()
     {
@@ -104,44 +94,60 @@ public class AudioManager : MonoBehaviour
         masterMixer.SetFloat(groupName, valueInDb);
     }
 
-
-    //background music
-    public void PlayBackgroundMusic()
+    public IEnumerator PlayAndExitFade(AudioClip clip, float targetVolume, AudioMixerGroup mixerGroup, float fadeTime)
+{
+    AudioSource source = GetAvailableSource();
+    source.outputAudioMixerGroup = mixerGroup;
+    source.spatialBlend = 0f;
+    
+    // Make sure volume starts at zero if we're fading in
+    source.volume = 0f;
+    source.clip = clip;
+    source.Play();
+    print("Fading in with target volume " + targetVolume);
+    // ----- FADE IN -----
+    float elapsed = 0f;
+    while (elapsed < fadeTime)
     {
-        if(backgroundMusic.Count() > 0)
-        {
-            AudioClip bg = backgroundMusic[Random.Range(0, backgroundMusic.Count())];
-            if(bg == currentBackgroundMusic)
-            {
-                PlayBackgroundMusic();
-                return;
-            }
-            else
-            {
-                backgroundMusicPlaying = true;
-                //have a clip we didn't just play
-                currentBackgroundMusic = bg;
-                PlayOneShot(bg, 1f, bgMixerGroup);
-                StartCoroutine(WaitForBackgroundMusic(bg.length));
-            }
-        }
-        //can do same thing with ambient noise i think, but should give it a chance to play
+        elapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(elapsed / fadeTime);
+        source.volume = Mathf.Lerp(0f, targetVolume, t);
+        print("volume: " + source.volume);
+        yield return null;
     }
+    source.volume = targetVolume;
 
-    public void PlayAmbientSound()
+    // Wait for the middle portion of the track
+    float sustainTime = clip.length - (fadeTime * 2f);
+
+    if (sustainTime > 0f)
+        yield return new WaitForSeconds(sustainTime);
+    else
+        Debug.LogWarning("Clip length is too short for this fade in/out timing!");
+
+    // ----- FADE OUT -----
+    elapsed = 0f;
+    float startVol = source.volume;
+    print("fading out");
+    while (elapsed < fadeTime)
     {
-        if(ambientSounds.Count() > 0)
-        {
-
-        }
+        elapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(elapsed / fadeTime);
+        source.volume = Mathf.Lerp(startVol, 0f, t);
+        print("volume: " + source.volume);
+        yield return null;
     }
+    source.volume = 0f;
+
+    // Stop the AudioSource or let it finish naturally
+    source.Stop();
+    source.clip = null; 
+}
 
 
-    public IEnumerator WaitForBackgroundMusic(float time)
-    {
-        yield return new WaitForSeconds(time +1);
-        backgroundMusicPlaying = false;
-    }
+
+
+    
 
 }
 

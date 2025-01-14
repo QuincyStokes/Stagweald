@@ -125,7 +125,11 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateGold()
     {
-        goldAmountUI.text = gold.ToString();
+        if(goldAmountUI)
+        {
+            goldAmountUI.text = gold.ToString();
+        }
+        
     }
 
     public void UpdateInventoryUI()

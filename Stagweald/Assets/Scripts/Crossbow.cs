@@ -133,15 +133,22 @@ public class Crossbow : MonoBehaviour
 
     public void UpdateAmmoUI()
     {
-        reserveAmmo.text = InventoryManager.Instance.numBolts.ToString();
-        if(loaded)
+        if(reserveAmmo)
         {
-            loadedAmmo.text = "1";
+            reserveAmmo.text = InventoryManager.Instance.numBolts.ToString();
         }
-        else 
+        if(loadedAmmo)
         {
-           loadedAmmo.text = "0";
+            if(loaded)
+            {
+                loadedAmmo.text = "1";
+            }
+            else 
+            {
+            loadedAmmo.text = "0";
+            }
         }
+        
 
         
     }
