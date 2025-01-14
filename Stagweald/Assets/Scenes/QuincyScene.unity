@@ -648,6 +648,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &115470362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,6 +1143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageModifier: 1
+  hitmark: {fileID: 0}
+  audioMixerGroup: {fileID: 0}
 --- !u!1 &238459524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,6 +1732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageModifier: 1
+  hitmark: {fileID: 8300000, guid: 70edae9756958ec4eb7db3b366fee4ae, type: 3}
+  audioMixerGroup: {fileID: -8476654119314067400, guid: 7080b8c3ea099854689e14e630a4f5aa, type: 2}
 --- !u!1 &363080292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,6 +2079,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 448633904}
         m_TargetAssemblyTypeName: SellItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -2619,6 +2647,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 508115720}
         m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -2691,12 +2731,12 @@ MonoBehaviour:
   itemNameUI: {fileID: 651343499}
   descriptionUI: {fileID: 1550399610}
   lowerUI: {fileID: 88823603}
-  runeTexture: {fileID: 2800000, guid: 9678c0cef4262564bb8c7cbd704b248b, type: 3}
   runeMaterial: {fileID: 2100000, guid: 2597230e5ff143f47a03fbac53cbadeb, type: 2}
   crossbowRenderer: {fileID: 906040431}
   triggerRenderer: {fileID: 1241921388}
   leverRenderer: {fileID: 222976340}
   scopeRenderer: {fileID: 113757276}
+  crossbow: {fileID: 2139895167957895449}
 --- !u!1 &575395864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +2845,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 575395866}
         m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -3390,7 +3442,7 @@ GameObject:
   - component: {fileID: 673973402}
   - component: {fileID: 673973401}
   - component: {fileID: 673973400}
-  - component: {fileID: 673973399}
+  - component: {fileID: 673973403}
   m_Layer: 5
   m_Name: ShopItem ImprovedCrossbow
   m_TagString: Untagged
@@ -3420,34 +3472,6 @@ RectTransform:
   m_AnchoredPosition: {x: 128.1, y: -187.5}
   m_SizeDelta: {x: 256.2, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &673973399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673973397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9f47d498d2c9e4590474dcfdd2de34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeIcon: {fileID: 21300000, guid: aea7f70a5fbe29745a49832f9103708b, type: 3}
-  upgraded: 0
-  itemName: Improved Crossbow
-  description: An improved crossbow, deals more damage.
-  price: 80
-  oneTimePurchase: 1
-  image: {fileID: 1403981371}
-  itemNameUI: {fileID: 1134984091}
-  descriptionUI: {fileID: 1454179992}
-  lowerUI: {fileID: 88823603}
-  runeTexture: {fileID: 2800000, guid: 9678c0cef4262564bb8c7cbd704b248b, type: 3}
-  runeMaterial: {fileID: 2100000, guid: 6663eaec4f4459f4cbbd300644afd059, type: 2}
-  crossbowRenderer: {fileID: 906040431}
-  triggerRenderer: {fileID: 1241921388}
-  leverRenderer: {fileID: 222976340}
-  scopeRenderer: {fileID: 113757276}
 --- !u!114 &673973400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3492,7 +3516,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673973399}
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 673973403}
         m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
         m_Mode: 1
@@ -3542,6 +3578,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673973397}
   m_CullTransparentMesh: 1
+--- !u!114 &673973403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673973397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01855e4234ddc6489930774a394518a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeIcon: {fileID: 21300000, guid: 8fcc5f7df9f26364f9c8b266ffcfb908, type: 3}
+  upgraded: 0
+  itemName: Improved Crossbow
+  description: A slightly improved crossbow, higher damage
+  price: 80
+  oneTimePurchase: 1
+  image: {fileID: 1403981371}
+  itemNameUI: {fileID: 1134984091}
+  descriptionUI: {fileID: 1454179992}
+  lowerUI: {fileID: 88823603}
+  improvedMaterial: {fileID: 2100000, guid: 6663eaec4f4459f4cbbd300644afd059, type: 2}
+  crossbowRenderer: {fileID: 906040431}
+  triggerRenderer: {fileID: 1241921388}
+  leverRenderer: {fileID: 222976340}
+  scopeRenderer: {fileID: 113757276}
+  crossbow: {fileID: 2139895167957895449}
+  shopItemRuneCrossbow: {fileID: 508115720}
 --- !u!1 &675291849
 GameObject:
   m_ObjectHideFlags: 0
@@ -3880,6 +3945,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 712202876}
         m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -4040,6 +4117,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1141771705}
         m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
         m_MethodName: SetSellmode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4493,6 +4582,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796742901}
   m_CullTransparentMesh: 1
+--- !u!1 &821766301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821766303}
+  - component: {fileID: 821766302}
+  m_Layer: 0
+  m_Name: AmbientSoundController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &821766302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821766301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e251873e6914e634eadf2637d90e1387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ambientSounds: []
+--- !u!4 &821766303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821766301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1127.3596, y: 537.39185, z: 311.19653}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832044338
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,6 +5439,18 @@ MonoBehaviour:
       - m_Target: {fileID: 88823603}
         m_TargetAssemblyTypeName: TrapperUILowerController, Assembly-CSharp
         m_MethodName: Confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6893,6 +7039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageModifier: 2
+  hitmark: {fileID: 0}
+  audioMixerGroup: {fileID: 0}
 --- !u!1 &1134984089
 GameObject:
   m_ObjectHideFlags: 0
@@ -7225,6 +7373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapperUI: {fileID: 88823603}
+  buttonClick: {fileID: 8300000, guid: d1032898f00c66942979a981ce487aaa, type: 3}
+  amg: {fileID: -8219848151220829296, guid: 7080b8c3ea099854689e14e630a4f5aa, type: 2}
 --- !u!1 &1180484219
 GameObject:
   m_ObjectHideFlags: 0
@@ -7775,6 +7925,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1302715610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7993,6 +8155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 7080b8c3ea099854689e14e630a4f5aa, type: 2}
   poolSize: 10
+  backgroundMusic: []
+  bgMixerGroup: {fileID: 0}
+  ambientSounds: []
+  ambientMixerGroup: {fileID: 0}
 --- !u!1 &1392937982
 GameObject:
   m_ObjectHideFlags: 0
@@ -8813,10 +8979,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 575395865}
+  - {fileID: 712202875}
   - {fileID: 1839915189}
   - {fileID: 673973398}
   - {fileID: 508115715}
-  - {fileID: 712202875}
   m_Father: {fileID: 1958087742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -8969,6 +9135,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1508034939}
         m_TargetAssemblyTypeName: SellItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -10462,6 +10640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageModifier: 0.3
+  hitmark: {fileID: 0}
+  audioMixerGroup: {fileID: 0}
 --- !u!1 &1768622227
 GameObject:
   m_ObjectHideFlags: 0
@@ -10967,6 +11147,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1839915192}
         m_TargetAssemblyTypeName: ShopItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -11370,6 +11562,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1938859657
 GameObject:
   m_ObjectHideFlags: 0
@@ -11688,6 +11892,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1141771705}
+        m_TargetAssemblyTypeName: ButtonFunctions, Assembly-CSharp
+        m_MethodName: PlayButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1988254519}
         m_TargetAssemblyTypeName: SellItem, Assembly-CSharp
         m_MethodName: UpdateLowerUI
@@ -11994,6 +12210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapperUI: {fileID: 0}
+  buttonClick: {fileID: 0}
+  amg: {fileID: 0}
 --- !u!1 &2066605156
 GameObject:
   m_ObjectHideFlags: 0
@@ -12608,6 +12826,7 @@ MonoBehaviour:
   movementError: 10
   reloadCooldown: 1
   fireCooldown: 1
+  isUpgraded: 0
   loadedAmmo: {fileID: 1887613695}
   reserveAmmo: {fileID: 1299574663}
   scopeUI: {fileID: 1063435041}
@@ -12959,3 +13178,4 @@ SceneRoots:
   - {fileID: 280956556}
   - {fileID: 594730053}
   - {fileID: 1317848750}
+  - {fileID: 821766303}
