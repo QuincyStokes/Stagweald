@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ButtonFunctions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TrapperUILowerController trapperUI;
+    public AudioClip buttonClick;
+    public AudioMixerGroup amg;
+    
+    public void SetBuyMode()
     {
-        
+        trapperUI.buyMode = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetSellmode()
     {
-        
+        trapperUI.buyMode = false;
+    }
+
+    public void PlayButtonClick()
+    {
+        AudioManager.Instance.PlayOneShotVariedPitch(buttonClick, 1f, amg, .05f);
     }
 }

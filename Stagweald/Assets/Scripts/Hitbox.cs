@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Hitbox : MonoBehaviour, IHitbox
 {
@@ -10,6 +11,8 @@ public class Hitbox : MonoBehaviour, IHitbox
     public float DamageModifier { get => damageModifier; set => damageModifier = value; }
 
     private PlayerMovement player;
+    [SerializeField] AudioClip hitmark;
+    [SerializeField] AudioMixerGroup audioMixerGroup;
 
 
     
@@ -21,6 +24,7 @@ public class Hitbox : MonoBehaviour, IHitbox
         {
             print(" by a bolt");
             Bolt bolt = other.GetComponent<Bolt>();
+            AudioManager.Instance.PlayOneShot(hitmark, 1f, audioMixerGroup);
             if(bolt != null)
             {
                 print("Deer took " + DamageModifier * bolt.damage + " damage in the " + this.name);

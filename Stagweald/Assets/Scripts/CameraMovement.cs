@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void Update()
+    public void LateUpdate()
     {
         //get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * xSensitivity;
@@ -37,6 +37,7 @@ public class CameraMovement : MonoBehaviour
         //apply the rotation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.position = orientation.position;
         
     }
 }
