@@ -27,12 +27,20 @@ public class BackgroundMusicController : MonoBehaviour
     {
         if(!backgroundMusicPlaying)
         {
-            PlayBackgroundMusic();
+            //PlayBackgroundMusic();
         }
     }
     //background music
     public void PlayBackgroundMusic()
     {
+        if(backgroundMusic.Count() == 1)
+        {
+            backgroundMusicPlaying = true;
+            AudioClip bg = backgroundMusic[0];
+            currentBackgroundMusic = backgroundMusic[0];
+            StartCoroutine(AudioManager.Instance.PlayAndExitFade(bg, 1f, bgMixerGroup, 5f));
+            StartCoroutine(WaitForBackgroundMusic(bg.length));
+        }
 
         if(backgroundMusic.Count() > 0)
         {
@@ -47,7 +55,6 @@ public class BackgroundMusicController : MonoBehaviour
                 backgroundMusicPlaying = true;
                 //have a clip we didn't just play
                 currentBackgroundMusic = bg;
-                print("Playing " + bg.name);
                 StartCoroutine(AudioManager.Instance.PlayAndExitFade(bg, 1f, bgMixerGroup, 5f));
                 StartCoroutine(WaitForBackgroundMusic(bg.length));
             }
