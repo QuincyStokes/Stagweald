@@ -49,9 +49,9 @@ public class DeerSpawner : MonoBehaviour
     private Vector3 GenerateSpawnLocation()
     {
         //start way up in the air, raycast straight down, boom thats our spawn point
-        Vector3 randomPos = new Vector3(Random.Range(-worldSize, worldSize), 100, Random.Range(-worldSize, worldSize));
+        Vector3 randomPos = new Vector3(Random.Range(-worldSize, worldSize), 200, Random.Range(-worldSize, worldSize));
         RaycastHit hit;
-        if(Physics.Raycast(randomPos, Vector3.down, out hit, 120, layerMask))
+        if(Physics.Raycast(randomPos, Vector3.down, out hit, 200, layerMask))
         {
             if(Vector3.Distance(hit.point,player.transform.position) > distanceFromPlayer)
             {
