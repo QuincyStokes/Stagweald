@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using TMPro;
 using UnityEngine;
 
 public class Trapper : MonoBehaviour
@@ -29,6 +29,8 @@ public class Trapper : MonoBehaviour
     {
         shopMenu.SetActive(false);
     }
+
+    
 
     void Update()
     {

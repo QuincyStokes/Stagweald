@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae401891fd1a5c419cffe71528c309f, type: 3}
+  m_Name: TrapperDialogue
+  m_EditorClassIdentifier: 
+  interactDialogue:
+  - "Back for more, are ya? Well, I\u2019ve got more!\r"
+  - "Good to see you again. You know, some don\u2019t ever come back.\r\n\r"
+  - "I got a fire going while you were gone! Welcome back, friend.\r\n\r\n\r"
+  - "Got a crossbow that needs upgradin\u2019?\r\n"
+  - 'Welcome, friend. Got anything to trade in today?
+
+'
+  - 'Ah, you made it back in one piece! Drinks on me tonight, pal.
+
+'
+  - 'Good work out there. Have you got any hides for me?
+
+'
+  randomDialogue:
+  - I was almost gored by a stag once. I still have his antlers
+  - "What I wouldn\u2019t give for a cup of coffee that don\u2019t taste like dirt\u2026\r\n"
+  - "It\u2019s unforgiving out there, in the woods. Always watch your back.\r\n"
