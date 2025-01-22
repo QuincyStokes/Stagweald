@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     public TMP_Text spedometer;
     public TMP_Text state;
     public TMP_Text groundedText;
+    public TMP_Text onSlopeText;
 
     //private variables
     private float horizontalInput;
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
-        startYScale = transform.localScale.y;
+        startYScale = playerObject.localScale.y;
     }
 
     void Update()
@@ -86,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
         {
             groundedText.text = "Grounded: " + grounded.ToString();
         }
+
+        
         
         InputCheck();
         StateHandler();
@@ -131,8 +134,20 @@ public class PlayerMovement : MonoBehaviour
 
         else if (grounded && rb.velocity.magnitude <=1 )
         {
-            movementState = MovementState.Idle;
-            animator.SetInteger("State", 0);
+           if (horizontalInput != 0 || verticalInput != 0)
+            {
+            moveSpeed = walkSpeed;
+            movementState = MovementState.Walking;
+            animator.SetInteger("State", 1);
+            }
+            else
+            {
+                // If truly no input, remain Idle but be sure to pick a "default" speed
+                // or handle zero-movement differently
+                moveSpeed = 0f; // or something safe
+                movementState = MovementState.Idle;
+                animator.SetInteger("State", 0);
+            }
         }
         else if (grounded)
         {
@@ -143,10 +158,11 @@ public class PlayerMovement : MonoBehaviour
         else{
             movementState = MovementState.Air;
             animator.SetInteger("State", 2);
+            moveSpeed = walkSpeed;
         }
         if(state != null)
         {
-            state.text = movementState.ToString();
+            state.text = movementState.ToString() + "  " + moveSpeed.ToString();
         }
         
     }
@@ -167,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         //start crouching
         if(Input.GetKeyDown(crouchKey)) //CURRENTLY NO CHECK FOR GROUNDED 
         {
-            playerObject.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            playerObject.localScale = new Vector3(playerObject.localScale.x, crouchYScale, playerObject.localScale.z);
             //instead of scaling it down, lets just manually move the camera object down a little bit?
             //camera.
             //slight downward force to push them onto the ground
@@ -177,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
         //stop crouching
         if(Input.GetKeyUp(crouchKey))
         {
-            playerObject.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            playerObject.localScale = new Vector3(playerObject.localScale.x, startYScale, playerObject.localScale.z);
             //dont need to upward force, unity physics will figure it out :)
             
         }
@@ -194,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //we need to change the direction of our movement force to match the slope we are on, so we arent moving into the slope -> /
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+
             if(rb.velocity.y > 0)
             {
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
@@ -201,9 +218,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //this is if we're on flat ground
-        if(grounded)
+        else if(grounded)
         {
-            rb.AddForce(movementDirection.normalized * moveSpeed, ForceMode.Force);
+            rb.AddForce(movementDirection.normalized * moveSpeed * 20f, ForceMode.Force);
         }
         else if(!grounded)
         {
@@ -259,8 +276,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * .5f + .2f))
         {
+            
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
+            if(onSlopeText != null)
+            {
+                onSlopeText.text = "Slope Angle: " + angle.ToString() + "   On Slope: " + (angle < maxSlopeAngle && angle > 6).ToString();
+            }
+            return angle < maxSlopeAngle && angle > 5;
         }
         return false;
     }
