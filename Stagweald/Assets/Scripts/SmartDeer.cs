@@ -172,6 +172,7 @@ public class SmartDeer : MonoBehaviour
     {
         alive = false;
         deerState = DeerState.dead;
+        DeerSpawner.Instance.CurrentDeerAmount -= 1;
         //activate Interactible-ness
         ActivateInteractable();
         //when interacted with, play dissolve effect, despawn, give loot.

@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Unity.Profiling;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DeerSpawner : MonoBehaviour
 {
+    [HideInInspector]
+    public static DeerSpawner Instance;
+
     [Header("References")]
     public GameObject player;
     public GameObject[] deer; //4 kinds of deer (for now)
@@ -16,17 +21,32 @@ public class DeerSpawner : MonoBehaviour
     public float worldSize;
     private bool coroutineRunning;
     public LayerMask layerMask;
-    public int distanceFromPlayer;
+    public int minDistanceFromPlayer;
+    public int maxDistanceFromPlayer;
+    public int maxDeerAmount;
+    private int currentDeerAmount;
+    public int CurrentDeerAmount {
+        get {return currentDeerAmount;}
+        set {currentDeerAmount = value;}
+    }
 
 
     void Start()
     {
         coroutineRunning = false;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
     {
-        if(!coroutineRunning)
+        if(!coroutineRunning && currentDeerAmount <= maxDeerAmount)
         {
             StartCoroutine(SpawnDeer());
         }
@@ -41,6 +61,7 @@ public class DeerSpawner : MonoBehaviour
         //find a spawn location, away from a certain distance from the player, within world boundaries
         Vector3 position = GenerateSpawnLocation();
         Instantiate(newDeer, position, Quaternion.Euler(0, Random.Range(0, 360), 0));
+        CurrentDeerAmount += 1;
 
         yield return new WaitForSeconds(spawnTime);
         coroutineRunning = false;
@@ -53,11 +74,19 @@ public class DeerSpawner : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(randomPos, Vector3.down, out hit, 200, layerMask))
         {
-            if(Vector3.Distance(hit.point,player.transform.position) > distanceFromPlayer)
+            if(Vector3.Distance(hit.point, player.transform.position) > minDistanceFromPlayer &&
+                Vector3.Distance(hit.point, player.transform.position) < maxDistanceFromPlayer)
             {
-                return hit.point;
+                randomPos = hit.point;
             }
         }
+
+        NavMeshHit navHit;
+        if(NavMesh.SamplePosition(randomPos, out navHit, 100f, NavMesh.AllAreas))
+        {
+            return navHit.position;
+        }
+
         return GenerateSpawnLocation();
     }
 
