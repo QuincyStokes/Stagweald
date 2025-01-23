@@ -30,3 +30,15 @@ MonoBehaviour:
   - I was almost gored by a stag once. I still have his antlers
   - "What I wouldn\u2019t give for a cup of coffee that don\u2019t taste like dirt\u2026\r\n"
   - "It\u2019s unforgiving out there, in the woods. Always watch your back.\r\n"
+  interactDialogueAudio:
+  - {fileID: 8300000, guid: a98ff9b303e9a244c988100fe9640471, type: 3}
+  - {fileID: 8300000, guid: bde082b657bccc04dbe76d90cbcfecf4, type: 3}
+  - {fileID: 8300000, guid: 003276d0bd9b69c4ea83de67cb7d973f, type: 3}
+  - {fileID: 8300000, guid: e75495c0c4223cf4296941b34283555a, type: 3}
+  - {fileID: 8300000, guid: db7fb4b1bcfa01e4ab1d47d4653e1a3e, type: 3}
+  - {fileID: 8300000, guid: 6db3c02b3520bad4ba6db8940d4bcb16, type: 3}
+  - {fileID: 8300000, guid: 0774ab346e0615d4d99ce2e3afffb247, type: 3}
+  randomDialogueAudio:
+  - {fileID: 8300000, guid: 648f91b7e25a890438b90753a3f2a29c, type: 3}
+  - {fileID: 8300000, guid: 1dcaa813e84282c41b8dc0ce500752f8, type: 3}
+  - {fileID: 8300000, guid: 688411d834c3be240b2e4d523ad4e556, type: 3}

@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Source Pool")]
     [SerializeField] private int poolSize = 10;
     private List<AudioSource> audioSourcePool;
+    public AudioSource trapperAudioSource;
 
     
 
@@ -55,13 +56,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayOneShot(AudioClip clip, float volume, AudioMixerGroup mixerGroup)
+    public void PlayOneShot(AudioClip clip, float volume, AudioMixerGroup mixerGroup, AudioSource audioSource = null)
     {
-        AudioSource source = GetAvailableSource();
+        AudioSource source;
+        if(audioSource == null)
+        {
+            source = GetAvailableSource();
+        }
+        else{
+            source = audioSource;
+        }
+        
         source.clip = clip;
         source.outputAudioMixerGroup = mixerGroup;
         source.volume = volume;
-        source.spatialBlend = 0f; // 2D by default; adjust as needed
+        source.spatialBlend = 1f; // 2D by default; adjust as needed
         source.PlayOneShot(clip);
     }
 

@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using TMPro;
+using UnityEngine.Audio;
 
 public class DialogueController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class DialogueController : MonoBehaviour
 
     public TrapperDialogue trapperDialogue;
     public TMP_Text dialogueText;
+    public AudioMixerGroup dialogueAMG;
 
 
     void OnEnable()
@@ -18,9 +20,14 @@ public class DialogueController : MonoBehaviour
     public void SetRandomInteractionDialogue()
     {
         print(trapperDialogue.interactDialogue.Count);
+        int randQuote;
         if(trapperDialogue.interactDialogue.Count > 0)
         {
-            dialogueText.text = trapperDialogue.interactDialogue[Random.Range(0, trapperDialogue.interactDialogue.Count)];
+            randQuote = Random.Range(0, trapperDialogue.interactDialogue.Count);
+            dialogueText.text = trapperDialogue.interactDialogue[randQuote];
+            AudioManager.Instance.PlayOneShot(trapperDialogue.interactDialogueAudio[randQuote], 1.5f, dialogueAMG, AudioManager.Instance.trapperAudioSource);
         }   
+        print("Playing " + trapperDialogue.interactDialogueAudio[5].name);
+        
     }
 }
