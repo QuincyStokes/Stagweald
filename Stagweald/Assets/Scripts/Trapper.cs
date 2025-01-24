@@ -9,6 +9,7 @@ public class Trapper : MonoBehaviour
     public PlayerMovement playerMovement;
     public CameraMovement cameraMovement;
     public Crossbow crossbow;
+    
 
     [Header("Keybinds")]
     public KeyCode interactionKeyCode;
@@ -17,6 +18,10 @@ public class Trapper : MonoBehaviour
     [Header("UI")]
     public GameObject shopMenu;
     public GameObject interactionUI;
+    public GameObject inventoryUI;
+    public Vector3 trapperInventoryPosition;
+    private Vector3 baseInventoryPosition;
+    public GameObject inventoryPositionHolder;
 
 
     private bool playerInRange;
@@ -28,6 +33,7 @@ public class Trapper : MonoBehaviour
     void Start()
     {
         shopMenu.SetActive(false);
+        baseInventoryPosition = inventoryUI.transform.position;
     }
 
     
@@ -72,7 +78,8 @@ public class Trapper : MonoBehaviour
         cameraMovement.enabled = false;
         crossbow.enabled = false;
         shopMenu.SetActive(true);
-        
+        inventoryUI.SetActive(true);
+        inventoryUI.transform.position = inventoryPositionHolder.transform.position;
 
         //need to unlock cursor, make it visible, disable camera script
         Cursor.lockState = CursorLockMode.None;
@@ -91,6 +98,8 @@ public class Trapper : MonoBehaviour
         cameraMovement.enabled = true;
         crossbow.enabled = true;
         shopMenu.SetActive(false);
+        inventoryUI.SetActive(true);
+        inventoryUI.transform.position = baseInventoryPosition;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

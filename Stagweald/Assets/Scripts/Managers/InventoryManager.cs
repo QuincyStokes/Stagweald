@@ -134,10 +134,9 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateInventoryUI()
     {
-        numDeerHidesUI.text = "Deer Hide: " + numDeerHides;
-        numAntlersUI.text = "Antlers: " + numAntlers;
-        numBoltsUI.text = "Bolts: " + numBolts;
-        numMushroomsUI.text = "Mushrooms: " + numMushrooms;
+        numDeerHidesUI.text =  numDeerHides.ToString();
+        numAntlersUI.text =  numAntlers.ToString();
+        numMushroomsUI.text =  numMushrooms.ToString();
     }
 
     public bool SubtractBolts(int amount)
